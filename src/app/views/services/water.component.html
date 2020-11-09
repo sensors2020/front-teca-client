@@ -1,0 +1,229 @@
+<div class="animated fadeIn">
+
+
+
+
+  <div class="row">
+
+
+
+<!--Modal no cierre
+			[config]="{ backdrop: 'static' }"
+-->
+			<div bsModal #myModalAdd="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalRegistro" aria-hidden="true">
+			  <div class="modal-dialog modal-primary" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h4 class="modal-title">{{titulo}}</h4>
+				  </div>
+
+				  <div class="modal-body">
+
+
+						 <div class="row">
+							<div class="col-md-12">
+
+
+								 <div class="row">
+									<div class="col-md-12">
+									<label><b>Ubicación:</b> {{iemdevice.direccion}}</label>
+									</div>
+								 </div>						
+								 <div class="row">
+									<div class="col-md-6">
+									<label><b>Serie:</b> {{iemdevice.serie}}</label>
+									</div>
+									<!--
+									<div class="col-md-6">
+									<label><b>Tarifa (LT):</b> {{iemdevice.tarifa}}</label>
+									</div>
+									-->
+								 </div>						
+<!--
+								 <div class="row">
+									<div class="col-md-6">
+									<label><b>Consumo Total (Lt):</b>{{consumoTotal}}</label>
+									</div>
+									<div class="col-md-6">
+									<label><b>Precio Total (S/):</b> {{precioTotal}}</label>
+									</div>
+								 </div>						
+-->
+							</div>
+						</div>
+
+
+
+
+						 <div class="row">
+							<div class="col-md-12">
+
+								<form class="form-register">
+
+								 <div class="row" *ngIf="historico.length <= 0">
+									<div class="col-md-12">
+										No se encontraron registros.
+									</div>
+								 </div>	
+								 
+								 
+								 <div class="row" *ngIf="historico.length > 0">
+									<div class="col-md-12">
+									
+									  <table class="table table-striped">
+										<thead>
+										  <tr class="odd gradeX">
+											<th>FECHA</th>
+											<th>CONSUMO (LT)</th>
+											<th>CONSUMO (M3)</th>
+											<th>PRECIO S/.</th>
+										 </tr>
+										</thead>
+										<!-- -->
+										<tbody>
+ 									    <tr *ngFor="let item of historico; let i=index">
+												<td>{{item.fecha_tx}}</td>
+												<td>{{item.litros}}</td>
+												<td>{{item.metro3}}</td>
+												<td>{{item.monto}}</td>												
+										</tr>															   
+										</tbody>
+										
+									  </table>
+									  
+		  
+									</div>
+								 </div>						
+
+								</form>
+
+							</div>
+
+						 </div>
+						 
+
+				  </div>
+				  <div class="modal-footer">
+							<button type="button" class="btn btn-primary" (click)="close()">Cerrar</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+
+			<div bsModal #myModalAlert="bs-modal" [config]="{ backdrop: 'static' }" class="modal fade" tabindex="1500" role="dialog" aria-labelledby="myModalAlert" aria-hidden="true">
+			  <div class="modal-dialog modal-primary modal-lg" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h4 class="modal-title">{{titulo}}</h4>
+				  </div>
+				  
+				  <div class="modal-body">
+						 <div class="row">
+							<div class="col-md-12">
+								&nbsp;<br><br>
+							</div>
+						 </div>
+				  
+						 <div class="row">
+							<div class="col-md-12">
+								{{mensaje}}	
+							</div>
+						 </div>
+
+						 <div class="row">
+							<div class="col-md-12">
+								&nbsp;<br><br>
+							</div>
+						 </div>
+				  </div>
+
+				  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" (click)="closeAlert()">Cerrar</button>
+				  </div>  
+
+				</div>
+
+
+			  </div>
+			</div>
+
+
+
+
+    <!--/.col-->
+    <div class="col-lg-12">
+      <div class="card">
+		<div class="card-header">
+          <i class="fa fa-align-justify"></i> Dispositivos
+
+
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+<!--
+                <th>NOMBRE</th>
+    -->
+				<th>INSCRIPCIÓN</th>
+                <th>FINALIZACIÓN</th>
+                <th>PLAN</th>
+                <th>ID</th>
+                <th>ALIAS</th>
+                <th>CONSUMO (M3)</th>
+<!--
+                <th>ESTADO</th>
+-->
+                <th>REGISTROS</th>
+              </tr>
+            </thead>
+            <tbody>
+			
+		    <tr *ngFor="let objeto of returnedUsuarios">
+<!--
+				<td>{{objeto.apellido}}, {{objeto.nombre}}</td>
+		-->
+				<td>{{objeto.inscripcion}}</td>
+				<td>{{objeto.finalizacion}}</td>
+				<td>{{objeto.plan}}</td>
+				<td>{{objeto.serie}}</td>
+				<td>{{objeto.alias}}</td>
+				<td>{{objeto.consumo}}</td>
+<!--
+                <td>
+					<span *ngIf="objeto.estado == 0" class="badge badge-warning">INACTIVO</span>
+					<span *ngIf="objeto.estado == 1" class="badge badge-success">ACTIVO</span>
+				</td>
+-->
+				<td> 
+					<i (click)="view(objeto)" class="fa fa-building-o fa-lg mt-2"></i>
+					&nbsp;&nbsp;
+					<i (click)="detailDashboard(objeto)" class="icon-chart fa-lg mt-2"></i>
+					
+
+<!--
+					&nbsp;&nbsp;&nbsp;
+					<i *ngIf="objeto.estado == 1" (click)="statusServicio(objeto)" class="fa fa-thumbs-o-down fa-lg mt-2"></i>
+					<i *ngIf="objeto.estado == 0" (click)="statusServicio(objeto)" class="fa fa-thumbs-o-up fa-lg mt-2"></i>
+-->
+				</td>
+			</tr>															   
+			
+            </tbody>
+          </table>
+		  
+    <pagination [totalItems]="listUsuarios.length" 
+	itemsPerPage={{paginationNumber}}
+	(pageChanged)="pageChanged($event)"></pagination>
+    	    
+
+
+       </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+
+</div>

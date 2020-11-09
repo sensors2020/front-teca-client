@@ -1,0 +1,163 @@
+<div class="animated fadeIn">
+
+   
+	
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Búsqueda
+        </div>
+        <div class="card-body">
+
+		<!--
+		  <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Inicio</label>
+				<input type="date" class="form-control" id="inicio" name="inicio" [(ngModel)]="inicio" placeholder="Inicio">				
+              </div>
+            </div>
+  
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Fin</label>
+				<input type="date" class="form-control" id="fin" name="fin" [(ngModel)]="fin" placeholder="Fin">				
+              </div>
+            </div>
+  
+   
+          </div>
+		  -->
+         
+
+		  <div class="row">
+<!--
+-->
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="name">Dispositivo</label>
+				<select class="form-control" name="device" [(ngModel)]="device">
+					<option [ngValue]="objeto.serie" *ngFor="let objeto of devices">{{objeto.alias}}</option>
+				</select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="name">Año</label>
+				<select class="form-control" name="periodo" [(ngModel)]="periodo">
+					<option [ngValue]="objeto.codigo" *ngFor="let objeto of periodos">{{objeto.description}}</option>
+				</select>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+				
+				&nbsp;&nbsp;&nbsp;
+				<br><i (click)="loadReporte()" class="cui-magnifying-glass icons font-2xl d-block mt-2"></i>
+            </div>
+
+<!--
+            <div class="col-sm-4">
+				&nbsp;&nbsp;&nbsp;
+				<button (click)="exportToExcel()" class="btn btn-success">Exportar</button> 
+            </div>
+-->
+
+	  
+	  
+          </div>
+
+		
+		</div>
+      </div>
+    </div><!--/.col-->
+    
+  </div>
+  
+  <div class="row">
+    
+<div class="col-lg-12">
+      <div class="card">
+	  
+       <div class="col-md-12 table-responsive" #epltable>
+
+       <div class="card-header">
+          <i class="fa fa-align-justify"></i> Reporte de Consumos de Agua
+				&nbsp;&nbsp;&nbsp;  
+				<button (click)="exportToExcel()" class="btn btn-success">Exportar</button> 
+
+        </div>
+        <div class="card-body">
+ 
+		 	 <div class="row" *ngIf="consumosaqua.length > 0">
+					<div class="col-md-12">
+					
+					  <table class="table table-striped">
+						<thead>
+						  <tr class="odd gradeX">
+							<th colspan="4">REPORTE DE CONSUMOS</th>
+						  </tr>
+						</thead>
+ 					    <tr>
+							<td colspan="2"><b>Servicio:</b> {{deviceSelected.descripcion_servicio}}</td>
+							<td colspan="2"><b>Cliente:</b> {{deviceSelected.nombre}} {{deviceSelected.apellido}}</td>							
+						</tr>			
+
+					    <tr>
+							<td colspan="2"><b>ID:</b> {{deviceSelected.serie}}</td>
+							<td colspan="2"><b>Alias:</b> {{deviceSelected.alias}}</td>
+						</tr>			
+
+ 					    <tr>
+							<td colspan="4"><b>Periodo:</b> {{deviceSelected.inscripcion}} - {{deviceSelected.finalizacion}}</td>
+						</tr>		 	
+						<tbody>
+
+						</tbody>
+					  </table>
+				</div>
+			</div>
+
+		 	 <div class="row" *ngIf="consumosaqua.length > 0">
+					<div class="col-md-12">
+					
+					  <table class="table table-striped">
+						<thead>
+						  <tr class="odd gradeX">
+							<th>PERIODO</th>
+							<th>CONSUMO (LT)</th>
+							<th>CONSUMO (M3)</th>
+							<th>PRECIO S/.</th>
+						  </tr>
+						</thead>
+						
+						<tbody>
+ 					    <tr *ngFor="let item of consumosaqua; let i=index">
+								<td>{{item.values}}</td>
+								<td>{{item.litros}}</td>
+								<td>{{item.metro3}}</td>
+								<td>{{item.monto}}</td>
+						</tr>															   
+						</tbody>
+						
+					  </table>
+					  
+		  
+					</div>
+			 </div>						
+
+
+        </div>
+      
+	  
+	  </div>
+	  
+	  </div>
+    </div>
+    
+	
+  </div>
+
+</div>

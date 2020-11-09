@@ -1,0 +1,18 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+.sidebar2 {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #383B59;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
